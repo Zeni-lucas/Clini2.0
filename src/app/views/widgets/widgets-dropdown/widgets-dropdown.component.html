@@ -1,8 +1,8 @@
 <c-row class="g-4">
-  <c-col sm="6" xl="5">
+  <c-col sm="6" xl="3">
     <c-widget-stat-a
       color="primary"
-      [title]="'Pacientes'"
+      [title]="'Users'"
     >
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
         26K
@@ -33,7 +33,7 @@
       </ng-template>
     </c-widget-stat-a>
   </c-col>
-  <!-- <c-col sm="6" xl="3">
+  <c-col sm="6" xl="3">
     <c-widget-stat-a
       [title]="'Income'"
       color="info"
@@ -61,8 +61,8 @@
         <c-chart [data]="data[1]" [options]="options[1]" class="mt-3 mx-3" height="70" type="line"></c-chart>
       </ng-template>
     </c-widget-stat-a>
-  </c-col> -->
-  <!-- <c-col sm="6" xl="3">
+  </c-col>
+  <c-col sm="6" xl="3">
     <c-widget-stat-a
       [title]="'Conversion Rate'"
       color="warning"
@@ -90,10 +90,10 @@
         <c-chart [data]="data[2]" [options]="options[2]" class="mt-3" height="70" type="line"></c-chart>
       </ng-template>
     </c-widget-stat-a>
-  </c-col> -->
-  <c-col sm="6" xl="5">
+  </c-col>
+  <c-col sm="6" xl="3">
     <c-widget-stat-a
-      [title]="'Consultas'"
+      [title]="'Sessions'"
       color="danger"
     >
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>

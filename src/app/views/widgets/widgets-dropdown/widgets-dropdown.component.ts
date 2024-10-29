@@ -30,26 +30,26 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
   data: any[] = [];
   options: any[] = [];
   labels = [
-    'Janeiro',
-    'Fevereiro',
-    'Março',
-    'Abril',
-    'Maio',
-    'Junho',
-    'Julho',
-    'Agosto',
-    'Setembro',
-    'Outubro',
-    'Novembro',
-    'Dezembro',
-    // 'Janeiro',
-    // 'Fevereiro',
-    // 'Março',
-    // 'Abril'
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+    'January',
+    'February',
+    'March',
+    'April'
   ];
   datasets = [
     [{
-      label: 'Pacientes Cadastrados',
+      label: 'My First dataset',
       backgroundColor: 'transparent',
       borderColor: 'rgba(255,255,255,.55)',
       pointBackgroundColor: getStyle('--cui-primary'),
@@ -71,7 +71,7 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
       data: [78, 81, 80, 45, 34, 12, 40],
       fill: true
     }], [{
-      label: 'Consultas Registradas',
+      label: 'My Fourth dataset',
       backgroundColor: 'rgba(255,255,255,.2)',
       borderColor: 'rgba(255,255,255,.55)',
       data: [78, 81, 80, 45, 34, 12, 40, 85, 65, 23, 12, 98, 34, 84, 67, 82],

@@ -4,21 +4,21 @@ import { UsuariodetailsComponent } from './usuariodetails/usuariodetails.compone
 
 export const routes: Routes = [
   {
-    path: 'Usuarios',
+    path: 'Usuario',
     component: UsuariolistComponent,
     data: {
       title: 'Lista de Usuarios'
     }
   },
   {
-    path: 'Usuarios/new',
+    path: 'Usuario/new',
     component: UsuariodetailsComponent,
     data: {
       title: 'Novo Usuario'
     }
   },
   {
-    path: 'Usuarios/edit/:id',
+    path: 'Usuario/edit/:id',
     component: UsuariodetailsComponent,
     data: {
       title: 'Editar Usuario'

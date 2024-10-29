@@ -4,21 +4,21 @@ import { PacientedetailsComponent } from './pacientedetails/pacientedetails.comp
 
 export const routes: Routes = [
   {
-    path: 'pacientes',
+    path: 'paciente',
     component: PacientelistComponent,
     data: {
       title: 'Lista de Pacientes'
     }
   },
   {
-    path: 'pacientes/new',
+    path: 'paciente/new',
     component: PacientedetailsComponent,
     data: {
       title: 'Novo Paciente'
     }
   },
   {
-    path: 'pacientes/edit/:id',
+    path: 'paciente/edit/:id',
     component: PacientedetailsComponent,
     data: {
       title: 'Editar Paciente'
