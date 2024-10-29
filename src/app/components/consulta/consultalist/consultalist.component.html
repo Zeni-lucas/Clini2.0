@@ -1,0 +1,39 @@
+<table
+[hover]="true"
+[responsive]="true"
+[striped]="true"
+align="middle"
+cTable
+class="mb-0 border"
+>
+<thead class="text-nowrap text-truncate">
+<tr>
+  <th class="bg-body-tertiary text-center ">ID</th>
+  <th class="bg-body-tertiary">Paciente</th>
+  <th class="bg-body-tertiary text-center">Hora Inicio</th>
+  <th class="bg-body-tertiary">Hora Fim</th>
+  <th class="bg-body-tertiary text-center">Status</th>
+</tr>
+</thead>
+<tbody>
+  @for (user of users; track user.nome; let i = $index) {
+    <tr>
+      <td class="text-center">
+        {{ user.id }}
+      </td>
+      <td>
+        <div>{{ user.nome }}</div>  
+      </td>
+      <td class="text-center">
+        {{user.horaInicio}}
+      </td>
+      <td>
+       {{user.HoraFim}}
+      </td>
+      <td class="text-center">
+        {{ user.status }}
+      </td>
+    </tr>
+  }
+</tbody>
+</table>
