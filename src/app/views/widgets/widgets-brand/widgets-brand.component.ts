@@ -56,7 +56,7 @@ export class WidgetsBrandComponent implements AfterContentInit {
       }
     }
   };
-  labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+  labels = ['Janeiro', 'February', 'March', 'April', 'May', 'June', 'July'];
   datasets = {
     borderWidth: 2,
     fill: true
