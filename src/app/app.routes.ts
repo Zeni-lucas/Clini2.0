@@ -19,16 +19,16 @@ export const routes: Routes = [
         loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes)
       },
       {
-        path: 'theme',
-        loadChildren: () => import('./views/theme/routes').then((m) => m.routes)
+        path: 'pacientes',
+        loadChildren: () => import('./views/paciente/routes').then((m) => m.routes)
       },
       {
-        path: 'base',
-        loadChildren: () => import('./views/base/routes').then((m) => m.routes)
+        path: 'calendar',
+        loadChildren: () => import('./views/calendar/routes').then((m) => m.routes)
       },
       {
-        path: 'buttons',
-        loadChildren: () => import('./views/buttons/routes').then((m) => m.routes)
+        path: 'usuario',
+        loadChildren: () => import('./views/usuario/routes').then((m) => m.routes)
       },
       {
         path: 'forms',

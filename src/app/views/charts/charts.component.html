@@ -1,72 +1,50 @@
 <c-row>
   <c-col xs="12">
-    <app-docs-callout href="charts">
-      CoreUI Angular wrapper component for Chart.js 4.4, the most popular charting library.
-      <br>
-    </app-docs-callout>
   </c-col>
-  <c-col xs="12" lg="6">
+  <c-col xs="12" lg="12">
     <c-card class="mb-4">
       <c-card-header>
-        Bar Chart
+        Listagem de pacientes
       </c-card-header>
       <c-card-body>
-        <c-chart type="bar" [data]="chartBarData" [options]="options" />
-      </c-card-body>
-    </c-card>
-  </c-col>
-  <c-col xs="12" lg="6">
-    <c-card class="mb-4">
-      <c-card-header>
-        Line Chart
-      </c-card-header>
-      <c-card-body>
-        <c-chart type="line" [data]="chartLineData" [options]="options" />
-      </c-card-body>
-    </c-card>
-  </c-col>
-</c-row>
-<c-row>
-  <c-col xs="12" lg="6">
-    <c-card class="mb-4">
-      <c-card-header>
-        Doughnut Chart
-      </c-card-header>
-      <c-card-body>
-        <c-chart type="doughnut" [data]="chartDoughnutData" [options]="options" />
-      </c-card-body>
-    </c-card>
-  </c-col>
-  <c-col xs="12" lg="6">
-    <c-card class="mb-4">
-      <c-card-header>
-        Pie Chart
-      </c-card-header>
-      <c-card-body>
-        <c-chart type="pie" [data]="chartPieData" [options]="options" />
-      </c-card-body>
-    </c-card>
-  </c-col>
-</c-row>
-<c-row>
-  <c-col xs="12" lg="6">
-    <c-card class="mb-4">
-      <c-card-header>
-        Polar Area Chart
-      </c-card-header>
-      <c-card-body>
-        <c-chart type="polarArea" [data]="chartPolarAreaData" [options]="options" />
-      </c-card-body>
-    </c-card>
-  </c-col>
-  <c-col xs="12" lg="6">
-    <c-card class="mb-4">
-      <c-card-header>
-        Radar Chart
-      </c-card-header>
-      <c-card-body>
-        <c-chart type="radar" [data]="chartRadarData" [options]="options" />
+        <div class="text-end mb-2">
+          <button type="button" class="btn btn-primary btn-rounded">
+            <svg [cIcon]="icons.cilUserPlus" size="xl" title="List Icon"></svg>
+          </button>
+        </div>
+        <div class="table-responsive"> 
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Data Nascimento</th>
+                <th>Telefone</th>
+                <th>Endereco</th>
+                <th class="text-center">Opções</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>mamonha</td>
+                <td>111111111</td>
+                <td>03-01-1997</td>
+                <td>4599999999999</td>
+                <td> rua exemplo</td>
+                <td class="text-center"> 
+                  <button cButton color="success" class="me-2" >
+                    <svg [cIcon]="icons.cilPenAlt" size="xl" title="List Icon"></svg>
+                  </button>
+                  <button cButton color="danger">
+                    <svg [cIcon]="icons.cilTrash" size="xl" title="List Icon"></svg>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div> <!-- Fim da div responsiva -->
       </c-card-body>
     </c-card>
   </c-col>
 </c-row>
+

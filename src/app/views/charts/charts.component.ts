@@ -1,18 +1,20 @@
 import { Component } from '@angular/core';
 import { ChartData } from 'chart.js';
 import { ChartjsComponent } from '@coreui/angular-chartjs';
-import { RowComponent, ColComponent, TextColorDirective, CardComponent, CardHeaderComponent, CardBodyComponent } from '@coreui/angular';
+import { RowComponent, ColComponent, TextColorDirective, CardComponent, CardHeaderComponent, CardBodyComponent, ButtonDirective } from '@coreui/angular';
 import { DocsCalloutComponent } from '@docs-components/public-api';
+import { IconDirective } from '@coreui/icons-angular';
+import { cilPen, cilPenAlt, cilPlus, cilTrash, cilUserPlus } from '@coreui/icons';
 
 @Component({
     selector: 'app-charts',
     templateUrl: './charts.component.html',
     styleUrls: ['./charts.component.scss'],
     standalone: true,
-    imports: [RowComponent, ColComponent, DocsCalloutComponent, TextColorDirective, CardComponent, CardHeaderComponent, CardBodyComponent, ChartjsComponent]
+    imports: [ IconDirective,RowComponent, ColComponent, DocsCalloutComponent, TextColorDirective, CardComponent, CardHeaderComponent, CardBodyComponent, ChartjsComponent, ButtonDirective]
 })
 export class ChartsComponent {
-
+  icons = { cilPlus, cilUserPlus, cilPenAlt, cilTrash};
   options = {
     maintainAspectRatio: false
   };

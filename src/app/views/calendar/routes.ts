@@ -1,13 +1,12 @@
 import { Routes } from '@angular/router';
-
-import { ChartsComponent } from './charts.component';
+import { CalendarComponent} from './calendar.component'
 
 export const routes: Routes = [
   {
     path: '',
-    component: ChartsComponent,
+    component: CalendarComponent,
     data: {
-      title: 'Pacientes'
+      title:"Agendamentos"
     }
   }
 ];
