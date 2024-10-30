@@ -28,12 +28,12 @@ export class UsuarioService {
     return this.http.get<Usuario>(this.API+"/findbyid/"+ id);
   }
 
-  save(usuario: Usuariodto): Observable<Responseusuariodto>{
-    return this.http.post<Usuariodto>(this.API+"/save", usuario, {responseType: 'text' as 'json'});
+  save(usuario: Usuariodto): Observable<Usuariodto> {
+    return this.http.post<Usuariodto>(`${this.API}/save`, usuario);
   }
 
-  update(usuario: Usuario, id: number): Observable<Usuario>{
-    return this.http.put<Usuario>(this.API + "/update/" + id, usuario, {responseType: 'text' as 'json'});
+  update(usuario: Usuario, id: number): Observable<Usuario> {
+    return this.http.put<Usuario>(`${this.API}/update/${id}`, usuario);
   }
 
   //TODO

@@ -1,20 +1,11 @@
-interface IUsuario{
-    id: number;
-    nome: string;
-    email: string;
 
-    getEmail: () => string;
-}
-
-
-export class Usuario implements IUsuario{
+export class Usuario{
     
-    id = 0;
-    nome = "mamonha";
-    email = "mamonha@gmail";
+    id!: number;
 
-    getEmail(){
-        return this.email;
-    }
+    nome!: string;
+    email!: string; 
+    telefone!: string;
+    senha!: string;
 }
 

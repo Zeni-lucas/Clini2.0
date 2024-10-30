@@ -36,12 +36,12 @@ export const navItems: INavData[] = [
     children: [
       {
         name: 'Cadastrar',
-        url: '/usuario/usuario',
+        url: '/usuario/new',
         icon: 'nav-icon-bullet'
       },
       {
         name: 'Editar/Removar',
-        url: '/base/breadcrumbs',
+        url: '/usuario',
         icon: 'nav-icon-bullet'
       },
     ]
