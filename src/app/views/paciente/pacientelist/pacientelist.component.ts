@@ -9,11 +9,12 @@ import { IconDirective } from '@coreui/icons-angular';
 import { DocsCalloutComponent } from '@docs-components/public-api';
 import { Endereco } from 'src/app/models/endereco';
 import Swal from 'sweetalert2'
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-pacientelist',
   standalone: true,
-  imports: [IconDirective, RowComponent, ColComponent, DocsCalloutComponent, TextColorDirective, CardComponent, CardHeaderComponent, CardBodyComponent, ButtonDirective, ModalModule, PacientedetailsComponent],
+  imports: [IconDirective, RowComponent, ColComponent, DocsCalloutComponent, TextColorDirective, CardComponent, CardHeaderComponent, CardBodyComponent, ButtonDirective, ModalModule, PacientedetailsComponent, CommonModule],
   templateUrl: './pacientelist.component.html',
   styleUrl: './pacientelist.component.scss'
 })

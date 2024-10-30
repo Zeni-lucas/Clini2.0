@@ -44,7 +44,7 @@ export class PacienteService  {
   }
 
   delete(id: number): Observable<void>{
-    return this.http.delete<void>(this.API + "/delete" + id);
+    return this.http.delete<void>(this.API + "/delete/" + id);
   }
 
   
