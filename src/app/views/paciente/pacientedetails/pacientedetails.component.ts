@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -5,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ButtonDirective, CardBodyComponent, CardComponent, CardHeaderComponent, ColComponent, RowComponent, TextColorDirective } from '@coreui/angular';
 import { IconDirective } from '@coreui/icons-angular';
 import { DocsCalloutComponent } from '@docs-components/public-api';
+import { NgxMaskDirective } from 'ngx-mask';
 import { Endereco } from 'src/app/models/endereco';
 import { Paciente } from 'src/app/models/paciente';
 import { PacienteService } from 'src/app/services/paciente.service';
@@ -13,7 +15,7 @@ import Swal from 'sweetalert2'
 @Component({
   selector: 'app-pacientedetails',
   standalone: true,
-  imports: [IconDirective, RowComponent, ColComponent, DocsCalloutComponent, TextColorDirective, CardComponent, CardHeaderComponent, CardBodyComponent, ButtonDirective, FormsModule],
+  imports: [CommonModule,IconDirective, RowComponent, ColComponent, DocsCalloutComponent, TextColorDirective, CardComponent, CardHeaderComponent, CardBodyComponent, ButtonDirective, FormsModule],
   templateUrl: './pacientedetails.component.html',
   styleUrl: './pacientedetails.component.scss'
 })
@@ -31,6 +33,20 @@ export class PacientedetailsComponent {
     let id = this.router.snapshot.params['id'];
     if(id > 0){
       this.findById(id);
+    }
+  }
+
+  formatarCep() {
+    if (this.paciente.endereco.cep) {
+      this.paciente.endereco.cep = this.paciente.endereco.cep.replace(/\D/g, '');
+      this.paciente.endereco.cep = this.paciente.endereco.cep.replace(/(\d{5})(\d)/, '$1-$2');
+    }
+  }
+  formatarTelefone() {
+    if (this.paciente.telefone) {
+      this.paciente.telefone = this.paciente.telefone.replace(/\D/g, '');
+      this.paciente.telefone = this.paciente.telefone.replace(/^(\d{2})(\d)/g, '+$1 $2');
+      this.paciente.telefone = this.paciente.telefone.replace(/(\d{2})(\d{5})(\d{4})/, '$1 $2-$3');
     }
   }
 
