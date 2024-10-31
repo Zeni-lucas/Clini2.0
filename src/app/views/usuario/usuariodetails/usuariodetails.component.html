@@ -20,7 +20,7 @@
               
                 <div class="mb-3">
                   <label for="telefone" class="form-label">Telefone</label>
-                  <input type="text" id="telefone" class="form-control" [(ngModel)]="usuario.telefone" name="telefone" required placeholder="Ex: +55 11 98765-4321" />
+                  <input type="text" id="telefone" class="form-control" [(ngModel)]="usuario.telefone" name="telefone"  required (keyup)="formatarTelefone()" placeholder="Ex: +55 11 98765-4321" />
                 </div>
 
                 <div class="mb-3">
@@ -31,6 +31,9 @@
                 <button type="submit" class="btn btn-primary btn-rounded" [disabled]="usuarioForm.invalid">
                   Salvar
                 </button>
+                <div *ngIf="usuarioForm.invalid" class="text-danger mt-2">
+                  Por favor, preencha todos os campos obrigatórios.
+                </div>
             </form>
         </c-card-body>
       </c-card>
