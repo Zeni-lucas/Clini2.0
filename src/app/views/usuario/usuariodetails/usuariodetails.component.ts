@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +14,7 @@ import Swal from 'sweetalert2'
 @Component({
   selector: 'app-usuariodetails',
   standalone: true,
-  imports: [IconDirective, RowComponent, ColComponent, DocsCalloutComponent, TextColorDirective, CardComponent, CardHeaderComponent, CardBodyComponent, ButtonDirective, ModalModule, FormsModule],
+  imports: [IconDirective, RowComponent, ColComponent, DocsCalloutComponent, TextColorDirective, CardComponent, CardHeaderComponent, CardBodyComponent, ButtonDirective, ModalModule, FormsModule, CommonModule],
   templateUrl: './usuariodetails.component.html',
   styleUrl: './usuariodetails.component.scss'
 })
@@ -32,6 +33,14 @@ export class UsuariodetailsComponent {
     let id = this.router.snapshot.params['id'];
     if(id > 0){
       this.findById(id);
+    }
+  }
+
+  formatarTelefone() {
+    if (this.usuario.telefone) {
+      this.usuario.telefone = this.usuario.telefone.replace(/\D/g, '');
+      this.usuario.telefone = this.usuario.telefone.replace(/^(\d{2})(\d)/g, '+$1 $2');
+      this.usuario.telefone = this.usuario.telefone.replace(/(\d{2})(\d{5})(\d{4})/, '$1 $2-$3');
     }
   }
 

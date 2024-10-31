@@ -25,14 +25,14 @@
               
                 <div class="mb-3">
                   <label for="telefone" class="form-label">Telefone</label>
-                  <input type="text" id="telefone" class="form-control" [(ngModel)]="paciente.telefone" name="telefone" required placeholder="Ex: +55 11 98765-4321" />
+                  <input type="text" id="telefone" class="form-control" [(ngModel)]="paciente.telefone" name="telefone"  required  (keyup)="formatarTelefone()" placeholder="Ex: +55 11 98765-4321" />
                 </div>
               
                 <h4>Endereço</h4>
                 
                 <div class="mb-3">
                   <label for="cep" class="form-label">CEP</label>
-                  <input type="text" id="cep" class="form-control" [(ngModel)]="paciente.endereco.cep" (blur)="buscarEndereco()" name="cep" required />
+                  <input type="text" id="cep" class="form-control" [(ngModel)]="paciente.endereco.cep" (blur)="buscarEndereco()" name="cep" (keyup)="formatarCep()" required />
                 </div>
               
                 <div class="mb-3">
@@ -63,6 +63,9 @@
                 <button type="submit" class="btn btn-primary btn-rounded" [disabled]="pacienteForm.invalid">
                   Salvar
                 </button>
+                <div *ngIf="pacienteForm.invalid" class="text-danger mt-2">
+                  Por favor, preencha todos os campos obrigatórios.
+                </div>
               </form>
         </c-card-body>
       </c-card>

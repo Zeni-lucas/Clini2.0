@@ -11,6 +11,7 @@ import { Endereco } from 'src/app/models/endereco';
 import Swal from 'sweetalert2'
 import { CommonModule } from '@angular/common';
 
+
 @Component({
   selector: 'app-pacientelist',
   standalone: true,
