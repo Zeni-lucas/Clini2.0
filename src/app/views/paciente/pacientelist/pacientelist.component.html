@@ -30,7 +30,7 @@
                   <td>{{ paciente.cpf }}</td>
                   <td>{{ paciente.dataDeNascimento }}</td>
                   <td>{{ paciente.telefone }}</td>
-                  <td>{{ paciente.endereco?.nomeRua || 'Endereço não informado' }}</td>
+                  <td>{{ paciente.endereco.nomeRua || 'Endereço não informado' }}</td>
                   <td class="text-center"> 
                     <button cButton color="success" class="me-2" (click)="update(paciente)" >
                       <svg [cIcon]="icons.cilPenAlt" size="xl" title="List Icon"></svg>
