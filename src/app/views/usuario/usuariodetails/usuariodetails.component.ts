@@ -26,6 +26,7 @@ export class UsuariodetailsComponent {
   usuarioService = inject(UsuarioService);
   lista:number[]=[1,2,3,4,5]
   usuariodto = new Usuariodto();
+  senhaVisivel: boolean = false;
 
 
 
@@ -34,6 +35,9 @@ export class UsuariodetailsComponent {
     if(id > 0){
       this.findById(id);
     }
+  }
+  toggleSenhaVisivel(): void {
+    this.senhaVisivel = !this.senhaVisivel;
   }
 
   formatarTelefone() {

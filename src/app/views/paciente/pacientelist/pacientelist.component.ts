@@ -60,7 +60,7 @@ export class PacientelistComponent {
           title: "Error!",
           text: "Pacientes Não encontrados",
           icon: "error",
-          confirmButtonText: 'cool'
+          confirmButtonText: 'Fechar'
         })
       },
     });
