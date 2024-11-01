@@ -25,7 +25,23 @@
 
                 <div class="mb-3">
                   <label for="senha" class="form-label">Senha</label>
-                  <input type="password" id="senha" class="form-control" [(ngModel)]="usuario.senha" name="senha" required />
+                  <div class="input-group">
+                    <input
+                      [type]="senhaVisivel ? 'text' : 'password'"
+                      id="senha"
+                      class="form-control"
+                      [(ngModel)]="usuario.senha"
+                      name="senha"
+                      required
+                    />
+                    <button 
+                      type="button" 
+                      class="btn btn-outline-secondary input-group-text" 
+                      (click)="toggleSenhaVisivel()"
+                    >
+                      {{ senhaVisivel ? 'Hide' : 'Show' }}
+                    </button>
+                  </div>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-rounded" [disabled]="usuarioForm.invalid">
