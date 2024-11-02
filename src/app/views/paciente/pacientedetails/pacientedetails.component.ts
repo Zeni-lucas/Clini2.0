@@ -20,12 +20,11 @@ import Swal from 'sweetalert2'
   styleUrl: './pacientedetails.component.scss'
 })
 export class PacientedetailsComponent {
-  @Input("paciente") paciente: Paciente = new Paciente(null!,'','',new Date(), '', new Endereco )
+  @Input("paciente") paciente: Paciente = new Paciente(null!,'','',new Date(), '', new Endereco() )
   @Output("retorno") retorno = new EventEmitter<any>(); 
   router = inject(ActivatedRoute);
   router2 = inject(Router);
   pacienteService = inject(PacienteService);
-  lista:number[]=[1,2,3,4,5]
 
 
 
@@ -54,6 +53,9 @@ export class PacientedetailsComponent {
     this.pacienteService.findById(id).subscribe({
       next: (retorno: Paciente)  => {
         this.paciente = retorno;
+        if (!this.paciente.endereco) {
+                this.paciente.endereco = new Endereco();
+            }
       },
       error: (error: any) => { 
         Swal.fire({
