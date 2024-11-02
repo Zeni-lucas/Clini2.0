@@ -23,7 +23,7 @@ export class PacientelistComponent {
   icons = { cilPlus, cilUserPlus, cilPenAlt, cilTrash};
   
   lista!: Paciente[];
-  pacienteEdit: Paciente= new Paciente(0,'','',new Date(), '', new Endereco );
+  pacienteEdit: Paciente= new Paciente(0,'','',new Date(), '', new Endereco());
   router=inject(Router);
   pacienteService = inject(PacienteService);
   modalVisible: boolean = false;

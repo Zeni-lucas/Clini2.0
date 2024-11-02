@@ -95,7 +95,7 @@ export class UsuariodetailsComponent {
                 });
                 this.router2.navigate(['Usuarios'], { state: { UsuarioEditado: this.usuario } });
                 this.retorno.emit(this.usuario);
-                this.usuario = retorno as Usuario; // Converte o retorno para Usuario aqui
+                this.usuario = retorno as Usuario;
             },
             error: (error: any) => {
                 Swal.fire({
