@@ -88,7 +88,7 @@ export class CalendarComponent implements OnInit {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     if (dataSelecionada < today) {
-      alert('Não é possível criar eventos em datas passadas.');
+      alert('Não é possível criar consultas em datas passadas.');
     } else {
       const dialogRef = this.dialog.open(CriarConsultaDialogComponent, {
         data: {
