@@ -6,7 +6,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { CriarConsultaDialogComponent } from './criar-consulta-dialog/criar-consulta-dialog.component';
-import { VisualizarConsultaDialogComponent } from './visualizar-consulta-dialog/visualizar-consulta-dialog.component';
+import { EditarConsultaDialogComponent } from './editar-consulta-dialog/editar-consulta-dialog.component';
 import { ConsultaService } from '../../services/consulta.service';
 import { ButtonDirective, CardBodyComponent, CardComponent, CardHeaderComponent, ColComponent, ModalModule, RowComponent, TextColorDirective } from '@coreui/angular';
 import { DocsCalloutComponent } from '@docs-components/public-api';
@@ -55,14 +55,13 @@ export class CalendarComponent implements OnInit {
     },
   };
 
-  ngOnInit() {
+  loadConsultas() {
     this.consultaService.findAll().subscribe((consultas) => {
       this.calendarOptions = {
         ...this.calendarOptions,
         events: consultas.map((consulta) => {
           const dataAgendamento = new Date(consulta.dataAgendamento);
-
-          const [horaInicioHoras, horaInicioMinutos, horaInicioSegundos] = consulta.horaDeInicio.split(':').map(Number);
+            const [horaInicioHoras, horaInicioMinutos, horaInicioSegundos] = consulta.horaDeInicio.split(':').map(Number);
           const start = new Date(dataAgendamento);
           start.setHours(horaInicioHoras, horaInicioMinutos, horaInicioSegundos || 0);
 
@@ -83,6 +82,10 @@ export class CalendarComponent implements OnInit {
     });
   }
 
+  ngOnInit() {
+    this.loadConsultas()
+  }
+
   handleDateClick(info: any) {
     const dataSelecionada = info.date;
     const today = new Date();
@@ -97,7 +100,7 @@ export class CalendarComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe((result: any) => {
         if (result) {
-          this.adicionarConsultaAoCalendario(result);
+          this.loadConsultas()
         }
       });
     }
@@ -108,8 +111,14 @@ export class CalendarComponent implements OnInit {
     const event = info.event;
     const consulta = event.extendedProps.consultaData;
   
-    this.dialog.open(VisualizarConsultaDialogComponent, {
+    const editDialog = this.dialog.open(EditarConsultaDialogComponent, {
       data: consulta,
+    });
+
+    editDialog.afterClosed().subscribe((consulta: any) => {
+      if (consulta) {
+        this.loadConsultas()
+      }
     });
   }
   
