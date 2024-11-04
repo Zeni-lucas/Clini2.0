@@ -29,7 +29,7 @@ export class UsuarioService {
   }
 
   save(usuario: Usuariodto): Observable<Usuariodto> {
-    return this.http.post<Usuariodto>(`${this.API}/save`, usuario);
+    return this.http.post<Usuariodto>(`${this.API}/save`, usuario,{responseType: 'text' as 'json'});
   }
 
   update(usuario: Usuario, id: number): Observable<Usuario> {
