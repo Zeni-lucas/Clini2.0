@@ -9,7 +9,7 @@
         </c-card-header>
         <c-card-body>
           <div class="text-end mb-2">
-            <button type="button" class="btn btn-primary btn-rounded">
+            <button type="button" class="btn btn-primary btn-rounded" (click)="new()">
               <svg [cIcon]="icons.cilUserPlus" size="xl" title="List Icon"></svg>
             </button>
           </div>
@@ -24,16 +24,13 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>mamonha</td>
-                  <td>mamonha.com</td>
-                  <td>4599999999999</td>
+                <tr *ngFor="let usuario of lista; let i = index">
+                  <td>{{ usuario.nome }}</td>
+                  <td>{{ usuario.email }}</td>
+                  <td>{{ usuario.telefone }}</td>
                   <td class="text-center"> 
-                    <button cButton color="success" class="me-2" >
+                    <button cButton color="success" class="me-2" (click)="update(usuario)" >
                       <svg [cIcon]="icons.cilPenAlt" size="xl" title="List Icon"></svg>
-                    </button>
-                    <button cButton color="danger">
-                      <svg [cIcon]="icons.cilTrash" size="xl" title="List Icon"></svg>
                     </button>
                   </td>
                 </tr>
@@ -45,17 +42,17 @@
     </c-col>
   </c-row>
 
-<!-- Modal do CoreUI
+Modal do CoreUI
  <c-modal [visible]="modalVisible" (closed)="closeModal()">
     <c-modal-header>
       <h5 class="modal-title">Cadastro</h5>
       <button type="button" class="btn-close" (click)="closeModal()"></button>
     </c-modal-header>
     <c-modal-body>
-        <app-pacientedetails [paciente]="pacienteEdit" (retorno)="retornoDetalhe($event)"></app-pacientedetails>
+        <app-usuariodetails [usuario]="usuarioEdit" (retorno)="retornoDetalhe($event)"></app-usuariodetails>
     </c-modal-body>
     <c-modal-footer>
       <button type="button" class="btn btn-secondary" (click)="closeModal()">Fechar</button>
     </c-modal-footer>
-  </c-modal> -->
+  </c-modal>
  
