@@ -29,7 +29,7 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
 
   totalPacientes: number = 0;
   totalConsultas: number = 0;
-  saldoGw: number = 0;
+  balance: number = 0;
   pacienteService = inject(PacienteService);
   consultaService = inject(ConsultaService);
 
@@ -70,6 +70,18 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
         }],
       };
       this.setOptions();
+    });
+  }
+
+  saldogw() {
+    this.http.get<{ balance: number }>("http://localhost:8000/api/saldo").subscribe({
+      next: (response) => {
+        console.log('Saldo:', response.balance);
+        this.balance = response.balance; // Se você tiver uma propriedade 'balance' na classe
+      },
+      error: (error) => {
+        console.error('Erro ao obter saldo:', error);
+      }
     });
   }
   obterTotaisConsultas() {
