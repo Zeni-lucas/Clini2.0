@@ -3,36 +3,55 @@ import { CommonModule, NgStyle } from '@angular/common';
 import { IconDirective } from '@coreui/icons-angular';
 import { ContainerComponent, RowComponent, ColComponent, CardGroupComponent, TextColorDirective, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, FormControlDirective, ButtonDirective } from '@coreui/angular';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { UsuarioService } from 'src/app/services/usuario.service';
+import { Logindto } from 'src/app/models/usuariodtos/logindto';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
     standalone: true,
-    imports: [ContainerComponent, RowComponent, ColComponent, CardGroupComponent, TextColorDirective, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, IconDirective, FormControlDirective, ButtonDirective, NgStyle, FormsModule, CommonModule]
+    imports: [ContainerComponent, RowComponent, ColComponent, CardGroupComponent, TextColorDirective, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, IconDirective, FormControlDirective, ButtonDirective, NgStyle, FormsModule, CommonModule, ReactiveFormsModule]
 })
 export class LoginComponent {
 
-  constructor(private router: Router){
+  loginForm: FormGroup;
 
+  constructor(
+    private fb: FormBuilder,
+    private usuarioService: UsuarioService,
+    private router: Router
+  ) {
+    this.loginForm = this.fb.group({
+      username: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
   }
-  
-  username: string = 'usuario@gmail.com';
-  password: string = 'admin123';
-  
 
   onSubmit() {
-    if (this.username === 'usuario@gmail.com' && this.password === 'admin123') {
-      this.router.navigate(['dashboard']);
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Erro!',
-        text: 'Credenciais inválidas. Por favor, tente novamente.',
-        confirmButtonText: 'Ok'
+    if (this.loginForm.valid) {
+      const loginData: Logindto = {
+        email: this.loginForm.get('username')?.value,
+        senha: this.loginForm.get('password')?.value,
+      };
+
+      this.usuarioService.login(loginData).subscribe({
+        next: () => {
+          this.router.navigate(['dashboard']);
+        },
+        error: () => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Erro!',
+            text: 'Credenciais inválidas. Por favor, tente novamente.',
+            confirmButtonText: 'Ok',
+          });
+        },
       });
+    } else {
+      console.log('Formulário inválido:', this.loginForm);
     }
   }
 }
