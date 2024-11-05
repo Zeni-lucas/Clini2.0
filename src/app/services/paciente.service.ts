@@ -27,6 +27,10 @@ export class PacienteService  {
     return this.http.post<Paciente>(this.API+"/create", paciente, {responseType: 'text' as 'json'});
   }
 
+  totalpormes(): Observable<number[]>{
+    return this.http.get<number[]>(this.API+"/totalpormes");
+  }
+
   update(paciente: Paciente, id: number): Observable<Paciente> {
     // Extraindo apenas os campos desejados
     const pacientePayload = {
