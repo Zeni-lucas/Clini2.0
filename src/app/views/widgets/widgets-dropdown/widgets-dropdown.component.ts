@@ -4,6 +4,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  inject,
   OnInit,
   ViewChild
 } from '@angular/core';
@@ -12,6 +13,9 @@ import { ChartjsComponent } from '@coreui/angular-chartjs';
 import { RouterLink } from '@angular/router';
 import { IconDirective } from '@coreui/icons-angular';
 import { RowComponent, ColComponent, WidgetStatAComponent, TemplateIdDirective, ThemeDirective, DropdownComponent, ButtonDirective, DropdownToggleDirective, DropdownMenuDirective, DropdownItemDirective, DropdownDividerDirective } from '@coreui/angular';
+import { HttpClient } from '@angular/common/http';
+import { PacienteService } from 'src/app/services/paciente.service';
+import { ConsultaService } from 'src/app/services/consulta.service';
 
 @Component({
     selector: 'app-widgets-dropdown',
@@ -23,8 +27,15 @@ import { RowComponent, ColComponent, WidgetStatAComponent, TemplateIdDirective, 
 })
 export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
 
+  totalPacientes: number = 0;
+  totalConsultas: number = 0;
+  balance: number = 0;
+  pacienteService = inject(PacienteService);
+  consultaService = inject(ConsultaService);
+
   constructor(
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private http: HttpClient
   ) {}
 
   data: any[] = [];
@@ -44,37 +55,50 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
     'Dezembro',
 
   ];
-  datasets = [
-    [{
-      label: 'Pacientes Registrados',
-      backgroundColor: 'transparent',
-      borderColor: 'rgba(255,255,255,.55)',
-      pointBackgroundColor: getStyle('--cui-primary'),
-      pointHoverBorderColor: getStyle('--cui-primary'),
-      data: [65, 59, 84, 84, 51, 55, 40]
-    }], [{
-      label: 'My Second dataset',
-      backgroundColor: 'transparent',
-      borderColor: 'rgba(255,255,255,.55)',
-      pointBackgroundColor: getStyle('--cui-info'),
-      pointHoverBorderColor: getStyle('--cui-info'),
-      data: [1, 18, 9, 17, 34, 22, 11]
-    }], [{
-      label: 'My Third dataset',
-      backgroundColor: 'rgba(255,255,255,.2)',
-      borderColor: 'rgba(255,255,255,.55)',
-      pointBackgroundColor: getStyle('--cui-warning'),
-      pointHoverBorderColor: getStyle('--cui-warning'),
-      data: [78, 81, 80, 45, 34, 12, 40],
-      fill: true
-    }], [{
-      label: 'Consultas Marcadas',
-      backgroundColor: 'rgba(255,255,255,.2)',
-      borderColor: 'rgba(255,255,255,.55)',
-      data: [78, 81, 80, 45, 34, 12, 40, 85, 65, 23, 12, 98, 34, 84, 67, 82],
-      barPercentage: 0.7
-    }]
-  ];
+  obterTotaisPacientes() {
+    this.pacienteService.totalpormes().subscribe((totais) => {
+      this.totalPacientes = totais.reduce((acc, val) => acc + val, 0);
+      this.data[1] = { 
+        labels: this.labels, 
+        datasets: [{
+          label: 'Pacientes Registrados',
+          backgroundColor: 'transparent',
+          borderColor: 'rgba(255,255,255,.55)',
+          pointBackgroundColor: getStyle('--cui-primary'),
+          pointHoverBorderColor: getStyle('--cui-primary'),
+          data: totais, 
+        }],
+      };
+      this.setOptions();
+    });
+  }
+
+  saldogw() {
+    this.http.get<{ balance: number }>("http://localhost:8000/api/saldo").subscribe({
+      next: (response) => {
+        console.log('Saldo:', response.balance);
+        this.balance = response.balance; // Se você tiver uma propriedade 'balance' na classe
+      },
+      error: (error) => {
+        console.error('Erro ao obter saldo:', error);
+      }
+    });
+  }
+  obterTotaisConsultas() {
+    this.consultaService.totalpormes().subscribe((total) => {
+      this.totalConsultas = total.reduce((acc, val) => acc + val, 0);
+      this.data[3] = { 
+        labels: this.labels, 
+        datasets: [{
+          label: 'Consultas Marcadas',
+          backgroundColor: 'rgba(255,255,255,.2)',
+          borderColor: 'rgba(255,255,255,.55)',
+          data: total, 
+          barPercentage: 0.7
+        }],
+      };
+    });
+  }
   optionsDefault = {
     plugins: {
       legend: {
@@ -122,6 +146,8 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
 
   ngOnInit(): void {
     this.setData();
+    this.obterTotaisPacientes();
+    this.obterTotaisConsultas();
   }
 
   ngAfterContentInit(): void {
@@ -133,7 +159,7 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
     for (let idx = 0; idx < 4; idx++) {
       this.data[idx] = {
         labels: idx < 3 ? this.labels.slice(0, 7) : this.labels,
-        datasets: this.datasets[idx]
+        //datasets: this.datasets[idx]
       };
     }
     this.setOptions();

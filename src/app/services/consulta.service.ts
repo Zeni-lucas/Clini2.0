@@ -20,6 +20,10 @@ export class ConsultaService {
     return this.http.get<Consulta[]>(this.API+"/findall");
   }
 
+  totalpormes(): Observable<number[]>{
+    return this.http.get<number[]>(this.API+"/totalpormes");
+  }
+
   findById(id: number): Observable<Consulta>{
     return this.http.get<Consulta>(this.API+"/findbyid/"+ id);
   }
