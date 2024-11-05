@@ -19,7 +19,7 @@ import Swal from 'sweetalert2'
   styleUrl: './usuariodetails.component.scss'
 })
 export class UsuariodetailsComponent {
-  @Input("usuario") usuario: Usuario = new Usuario();
+  @Input("usuario") usuario: Usuario = new Usuario(0, '',',','');
   @Output("retorno") retorno = new EventEmitter<any>(); 
   router = inject(ActivatedRoute);
   router2 = inject(Router);

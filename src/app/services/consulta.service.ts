@@ -11,7 +11,7 @@ export class ConsultaService {
 
   http = inject(HttpClient);
 
-  API = "http://localhost:8000/api/consulta";
+  API = "http://localhost:8080/api/consulta";
 
   
   constructor() { }
