@@ -36,6 +36,9 @@ export class UsuariolistComponent {
     this.openModal();
   }
 
+  handleVisibleChange(visible: boolean) {
+    this.modalVisible = visible;
+  }
   openModal() {
     this.modalVisible = true;
   }
@@ -62,8 +65,11 @@ export class UsuariolistComponent {
   }
 
   update(usuario: Usuario) {
+    console.log("usuario recebido: " + usuario.nome)
     this.usuarioEdit = Object.assign({}, usuario);
+    console.log("usuarioedit: " + this.usuarioEdit.nome);
     this.openModal();
+
   }
 
   retornoDetalhe(usuario: Usuario){

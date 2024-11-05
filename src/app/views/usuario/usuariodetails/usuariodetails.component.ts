@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ButtonDirective, CardBodyComponent, CardComponent, CardHeaderComponent, ColComponent, ModalModule, RowComponent, TextColorDirective } from '@coreui/angular';
@@ -19,7 +19,7 @@ import Swal from 'sweetalert2'
   styleUrl: './usuariodetails.component.scss'
 })
 export class UsuariodetailsComponent {
-  @Input("usuario") usuario: Usuario = new Usuario(0,'','','','');
+  @Input("usuario") usuario: Usuario = { id: 0, nome: '', email: '', telefone: '', senha: '' };
   @Output("retorno") retorno = new EventEmitter<any>(); 
   router = inject(ActivatedRoute);
   router2 = inject(Router);
@@ -29,7 +29,11 @@ export class UsuariodetailsComponent {
   senhaVisivel: boolean = false;
 
 
-
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['usuario'] && changes['usuario'].currentValue) {
+      this.usuariodto = { ...this.usuario, senha: this.usuario.senha || '' };
+    }
+  }
   constructor(private http: HttpClient){
     let id = this.router.snapshot.params['id'];
     if(id > 0){
@@ -41,7 +45,7 @@ export class UsuariodetailsComponent {
   }
 
   formatarTelefone() {
-    if (this.usuario.telefone) {
+    if (this.usuario && this.usuario.telefone) {
       this.usuario.telefone = this.usuario.telefone.replace(/\D/g, '');
       this.usuario.telefone = this.usuario.telefone.replace(/^(\d{2})(\d)/g, '+$1 $2');
       this.usuario.telefone = this.usuario.telefone.replace(/(\d{2})(\d{5})(\d{4})/, '$1 $2-$3');
@@ -66,6 +70,7 @@ export class UsuariodetailsComponent {
 
   save() {
     if (this.usuario.id > 0) {
+      this.usuario = { ...this.usuariodto };
         this.usuarioService.update(this.usuario, this.usuario.id).subscribe({
             next: (retorno: Usuario) => {
                 Swal.fire({

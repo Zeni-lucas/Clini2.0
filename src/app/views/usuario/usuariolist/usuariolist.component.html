@@ -9,9 +9,6 @@
         </c-card-header>
         <c-card-body>
           <div class="text-end mb-2">
-            <button type="button" class="btn btn-primary btn-rounded" (click)="new()">
-              <svg [cIcon]="icons.cilUserPlus" size="xl" title="List Icon"></svg>
-            </button>
           </div>
           <div class="table-responsive"> 
             <table class="table table-striped">
@@ -42,17 +39,20 @@
     </c-col>
   </c-row>
 
-Modal do CoreUI
- <c-modal [visible]="modalVisible" (closed)="closeModal()">
-    <c-modal-header>
-      <h5 class="modal-title">Cadastro</h5>
-      <button type="button" class="btn-close" (click)="closeModal()"></button>
-    </c-modal-header>
-    <c-modal-body>
-        <app-usuariodetails [usuario]="usuarioEdit" (retorno)="retornoDetalhe($event)"></app-usuariodetails>
-    </c-modal-body>
-    <c-modal-footer>
-      <button type="button" class="btn btn-secondary" (click)="closeModal()">Fechar</button>
-    </c-modal-footer>
-  </c-modal>
- 
+
+  <c-modal 
+  [visible]="modalVisible" 
+  (visibleChange)="handleVisibleChange($event)"
+  (closed)="closeModal()"
+>
+  <c-modal-header>
+    <h5 class="modal-title">Atualizar Dados</h5>
+    <button type="button" class="btn-close" (click)="closeModal()"></button>
+  </c-modal-header>
+  <c-modal-body>
+    <app-usuariodetails [usuario]="usuarioEdit" (retorno)="retornoDetalhe($event)"></app-usuariodetails>
+  </c-modal-body>
+  <c-modal-footer>
+    <button type="button" class="btn btn-secondary" (click)="closeModal()">Fechar</button>
+  </c-modal-footer>
+</c-modal>
