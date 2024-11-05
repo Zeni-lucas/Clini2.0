@@ -11,13 +11,17 @@ export class ConsultaService {
 
   http = inject(HttpClient);
 
-  API = "http://localhost:8000/api/consulta";
+  API = "http://localhost:8080/api/consulta";
 
   
   constructor() { }
 
   findAll(): Observable<Consulta[]>{
     return this.http.get<Consulta[]>(this.API+"/findall");
+  }
+
+  totalpormes(): Observable<number[]>{
+    return this.http.get<number[]>(this.API+"/totalpormes");
   }
 
   findById(id: number): Observable<Consulta>{
