@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Router } from '@angular/router';
 import { Logindto } from 'src/app/models/usuariodtos/logindto';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
     selector: 'app-login',
@@ -20,12 +21,12 @@ export class LoginComponent {
 
   constructor(
     private fb: FormBuilder,
-    private usuarioService: UsuarioService,
+    private loginService: LoginService,
     private router: Router
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required]]
     });
   }
 
@@ -38,14 +39,19 @@ export class LoginComponent {
         senha: this.loginForm.get('password')?.value
       };
   
-      this.usuarioService.login(loginData).subscribe({
-        next: (response) => { 
-          console.log('Login bem-sucedido:', response);
-          this.router.navigate(['/admin']);
+      this.loginService.login(loginData).subscribe({
+        next: response => { 
+          if(response && response.token){
+            const token = response.token;
+            this.loginService.addToken(token);
+            this.router.navigate(['/admin/dashboard']);
+          } else {
+            alert('Login falhou. Verifique suas credenciais.');
+          }
+        
         },
-        error: (error) => {
+        error: error => {
           console.error('Erro de login:', error);
-          alert('Login falhou. Verifique suas credenciais.');
         }
       });
     } else {
