@@ -40,7 +40,7 @@ export class LoginComponent {
       this.loginService.login(loginData).subscribe({
         next: response => {
           if (response) {
-            this.loginService.addToken(response);
+            this.loginService.addToken(response.token);
             this.router.navigate(['/admin/dashboard']);
           } else {
             alert('Login falhou. Verifique suas credenciais.');
