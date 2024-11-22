@@ -32,7 +32,7 @@
                 </c-input-group>
                 <c-row>
                   <c-col xs="6">
-                    <button cButton class="px-4" color="primary" type="submit">
+                    <button cButton class="px-4" [ngStyle]="{'background-color': '#23314F' }" type="submit">
                       Login
                     </button>
                   </c-col>
@@ -40,8 +40,13 @@
               </form>
             </c-card-body>
           </c-card>
-          <c-card [ngStyle]="{ 'minWidth.%': 44 }" class="text-white bg-primary py-5">
-            <c-card-body class="text-center"></c-card-body>
+          <c-card [ngStyle]="{ 'minWidth.%': 44, 'background-color': '#23314F' }" colorScheme="dark" class="text-white  py-5">
+            <c-card-body class="text-center">
+              <!-- <c-card [ngStyle]="{ 'minWidth.%': 25, 'margin-top': '50px' }" class="text-white py-4"> -->
+                
+                <img src="assets/images/Logo_sem_fundo.png" alt="Descrição da imagem"  [ngStyle]="{ 'width': '300px', 'margin-top': '80px'  }" />
+              <!-- </c-card> -->
+            </c-card-body>
           </c-card>
         </c-card-group>
       </c-col>
