@@ -29,7 +29,7 @@ export class UsuarioService {
   }
 
   save(usuario: Usuariodto): Observable<Usuariodto> {
-    return this.http.post<Usuariodto>(`${this.API}/save`, usuario,{responseType: 'text' as 'json'});
+    return this.http.post<Usuariodto>(`${this.API}/save`, usuario);
   }
 
   update(usuario: Usuario, id: number): Observable<Usuario> {
@@ -41,8 +41,6 @@ export class UsuarioService {
     return this.http.put<void>(this.API+"/senha/" + usuario.id, usuario, {responseType: 'text' as 'json'});
   }
 
-  login(loginData: Logindto): Observable<Responseusuariodto> {
-    return this.http.post<Responseusuariodto>(this.API+'/login', loginData);
-  }
+  
   
 }

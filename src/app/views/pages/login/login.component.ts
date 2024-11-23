@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule } 
 import Swal from 'sweetalert2';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { Logindto } from 'src/app/models/usuariodtos/logindto';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
     selector: 'app-login',
@@ -16,39 +17,38 @@ import { Logindto } from 'src/app/models/usuariodtos/logindto';
     imports: [ContainerComponent, RowComponent, ColComponent, CardGroupComponent, TextColorDirective, CardComponent, CardBodyComponent, FormDirective, InputGroupComponent, InputGroupTextDirective, IconDirective, FormControlDirective, ButtonDirective, NgStyle, FormsModule, CommonModule, ReactiveFormsModule]
 })
 export class LoginComponent {
-
   loginForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private usuarioService: UsuarioService,
+    private loginService: LoginService,
     private router: Router
   ) {
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
     });
   }
 
   onSubmit() {
     if (this.loginForm.valid) {
       const loginData: Logindto = {
-        email: this.loginForm.get('username')?.value,
-        senha: this.loginForm.get('password')?.value,
+        email: this.loginForm.get('email')?.value,
+        senha: this.loginForm.get('password')?.value
       };
 
-      this.usuarioService.login(loginData).subscribe({
-        next: () => {
-          this.router.navigate(['dashboard']);
+      this.loginService.login(loginData).subscribe({
+        next: response => {
+          if (response) {
+            this.loginService.addToken(response.token);
+            this.router.navigate(['/admin/dashboard']);
+          } else {
+            alert('Login falhou. Verifique suas credenciais.');
+          }
         },
-        error: () => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Erro!',
-            text: 'Credenciais inválidas. Por favor, tente novamente.',
-            confirmButtonText: 'Ok',
-          });
-        },
+        error: error => {
+          console.error('Erro de login:', error);
+        }
       });
     } else {
       console.log('Formulário inválido:', this.loginForm);
