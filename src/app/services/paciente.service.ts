@@ -10,7 +10,7 @@ export class PacienteService  {
 
   http = inject(HttpClient);
 
-  API = "http://4.228.61.72:8081/api/paciente";
+  API = "http://localhost:8080/api/paciente";
 
   
   constructor() { }
